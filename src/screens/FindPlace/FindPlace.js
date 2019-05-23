@@ -3,13 +3,29 @@ import { View, Text } from "react-native";
 import { connect } from "react-redux";
 import PlaceList from "../../components/List/PlaceList";
 
+
 class FindPlaceScreen extends Component {
+
+    itemSelectedHandler = key => {
+        const selPlace = this.props.places.find(place => {
+            return place.key === key;
+        });
+
+        this.props.navigator.push({
+            screen: "navigation.DetailPlaceScreen",
+            title: selPlace.name,
+            passProps: {
+                selectedPlace: selPlace
+            }
+        });
+    };
+
     render () {
         return (
             <View>
                 <Text>On Find Place Screen</Text>
                 <Text>Last Word --> {this.props.lastPlace}</Text>
-                <PlaceList places={this.props.places}/>
+                <PlaceList places={this.props.places} onItemSelected={this.itemSelectedHandler}/>
             </View>
         );
     }

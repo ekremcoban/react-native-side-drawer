@@ -9,7 +9,9 @@ const placeList = props => {
             style={styles.listContainer}
             data={props.places}
             renderItem={(info) => (
-                <ListItem placeName={info.item.name}/>
+                <ListItem 
+                    placeName={info.item.name}
+                    onItemPressed={() => props.onItemSelected(info.item.key)}/>
             )}
             keyExtractor={(item, index) => index.toString()}
         />
