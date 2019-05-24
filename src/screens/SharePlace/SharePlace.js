@@ -4,6 +4,21 @@ import { connect } from "react-redux";
 import { add } from "../../store/actions/index";
 
 class SharePlaceScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+    }
+
+    onNavigatorEvent = event => {
+        if (event.type === "NavBarButtonPress") {
+            if (event.id === "sideDrawerToggle") {
+                this.props.navigator.toggleDrawer ({
+                    side: "left"
+                });
+            }
+        }
+    }
+
     state = {
         placeName: ""
     };
@@ -22,7 +37,7 @@ class SharePlaceScreen extends Component {
         this.setState({
             placeName: ""
         });
-        
+
         this.props.onAddPlace(this.state.placeName);
     };
 
